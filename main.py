@@ -19,7 +19,7 @@ def main():
     ]
     
     agent.set_plan_library(plan_library)
-    agent.add_beliefs({'profile': 'confident'})  # Perfil padrão
+    agent.add_beliefs({'profile': 'confident'})  # Colocar na biblioteca de planos
     
     cap = cv2.VideoCapture(0)
     if not cap.isOpened():
@@ -47,7 +47,7 @@ def main():
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break  # Encerra o loop se 'q' for pressionado
         
-        time.sleep(0.1)  # Delay para processamento
+        time.sleep(0.25)  # Delay para processamento
     
     cap.release()
     cv2.destroyAllWindows()

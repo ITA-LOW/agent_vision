@@ -32,6 +32,4 @@ flowchart TD
     N --> P(Executa ações para ajustar a visão)
     P --> G(Volta ao loop para novo frame)
     O --> G(Volta ao loop para novo frame)
-    G -- Tecla 'q' pressionada? --> Q{Sim}
-    Q --> R(Finaliza execução)
 ```

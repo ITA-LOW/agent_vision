@@ -19,9 +19,9 @@ class PlanLibrary:
 
     def get_plan(self, goal, bb):
         """Retorna o primeiro plano adequado para o objetivo com base nos beliefs."""
-        print("DEBUG - Buscando plano para:", goal)
         print("DEBUG - Beliefs atuais:", bb)
-
+        print("DEBUG - Buscando plano para:", goal)
+        
         if goal not in self.plans:
             print("DEBUG - Nenhum plano encontrado para esse objetivo.")
             return None
