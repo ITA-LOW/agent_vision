@@ -11,6 +11,8 @@
 
 - [ ] testar aquisição de imagem com câmera normal, abandonar o esp32-cam para diminuir overhead da transmissão de imagem por http
 
+## Fluxograma
+
 ```mermaid
 flowchart TD
     A(Início: Executa main.py) --> B(Inicializa o objeto Agent)
