@@ -1,0 +1,21 @@
+```mermaid
+flowchart TD
+    A(Início: Executa main.py) --> B(Inicializa o objeto Agent)
+    B --> C(Define biblioteca de planos com posições e ações)
+    C --> D(Abre a câmera para captura de vídeo)
+    D --> E{Câmera aberta?}
+    E -- Não --> F(Exibe erro e encerra)
+    E -- Sim --> G(Loop principal: leitura dos frames)
+    G --> H(Captura um frame da webcam)
+    H --> I(Detecta posição do rosto)
+    I -- Rosto detectado --> J(Atualiza crença da posição)
+    I -- Nenhum rosto --> K(Continua sem atualizar crenças)
+    J --> L(Adiciona desejo de ajustar visão)
+    L --> M(Obtém plano correspondente)
+    M -- Plano encontrado --> N(Define intenção e adiciona ações)
+    M -- Nenhum plano --> O(Não executa ações)
+    N --> P(Executa ações para ajustar a visão)
+    P --> G(Volta ao loop para novo frame)
+    O --> G(Volta ao loop para novo frame)
+    G -- Tecla 'q' pressionada? --> Q{Sim}
+    Q --> R(Finaliza execução)
