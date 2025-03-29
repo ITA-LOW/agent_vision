@@ -1,7 +1,7 @@
 import cv2
 import time
 from agent import Agent
-from vision import detect_face_position
+from vision import detect_face_position, detect_face_position_yunet
 
 def main():
     agent = Agent()
@@ -34,7 +34,8 @@ def main():
             break
         
         # Detecta a posição do rosto
-        position = detect_face_position(frame)
+        position = detect_face_position_yunet(frame) # Yunet
+        # position = detect_face_position(frame) # Haarcascade
         
         if position:
             agent.add_beliefs({'position': position})
