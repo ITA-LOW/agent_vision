@@ -1,3 +1,5 @@
+import motion
+
 class PlanLibrary:
     def __init__(self):
         self.plans = {}
@@ -38,6 +40,7 @@ class PlanLibrary:
 class Action:
     def look_at_position(self, position):
         print(f"###> Looking at position {position} <### ")
+        motion.look_at(position)
 
 class Agent:
     def __init__(self):
@@ -72,6 +75,6 @@ class Agent:
 
             if self.plan_library.get_plan(next_action, self.beliefs) is None:
                 action_instance = Action()
-                action_instance.look_at_position(next_action)
+                action_instance.look_at_position(self.beliefs.get("position"))
             else:
                 self.intention.extend(self.plan_library.get_plan(next_action, self.beliefs))

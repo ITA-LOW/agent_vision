@@ -16,29 +16,37 @@ pwm2 = GPIO.PWM(SERVO_2, 50)
 pwm1.start(0)
 pwm2.start(0)
 
-def set_angle(servo, angle):
-    """ Convert angle (0-180) to duty cycle and move servo """
-    duty = (angle / 18) + 2  # Convert angle to duty cycle
-    servo.ChangeDutyCycle(duty)
-    time.sleep(0.5)
-    servo.ChangeDutyCycle(0)  # Stop sending signal to prevent jitter
+position_to_angle = {
+    "top_left": (45, 45), "top_center": (90, 45), "top_right": (135, 45),
+    "middle_left": (45, 90), "middle_center": (90, 90), "middle_right": (135, 90),
+    "bottom_left": (45, 135), "bottom_center": (90, 135), "bottom_right": (135, 135)
+}
 
-try:
-    while True:
-        set_angle(pwm1, 0)   # Move Servo 1 to 0°
-        set_angle(pwm2, 0)   # Move Servo 2 to 0°
-        time.sleep(1)
+def angle_to_duty_cycle(angle):
+    """ Convert angle (0-180) to duty cycle for 50Hz PWM (2-12% range). """
+    return (angle / 18) + 2
 
-        set_angle(pwm1, 90)  # Move Servo 1 to 90°
-        set_angle(pwm2, 90)  # Move Servo 2 to 90°
-        time.sleep(1)
+def look_at(position):
+    """ Move both servos to the specified position. """
+    if position not in position_to_angle:
+        print(f"Invalid position: {position}")
+        return
 
-        set_angle(pwm1, 180) # Move Servo 1 to 180°
-        set_angle(pwm2, 180) # Move Servo 2 to 180°
-        time.sleep(1)
+    angle1, angle2 = position_to_angle[position]
 
-except KeyboardInterrupt:
-    print("Stopping...")
+    duty1 = angle_to_duty_cycle(angle1)
+    duty2 = angle_to_duty_cycle(angle2)
+
+    pwm1.ChangeDutyCycle(duty1)
+    pwm2.ChangeDutyCycle(duty2)
+
+    time.sleep(0.5)  # Allow servos to move
+
+    pwm1.ChangeDutyCycle(0)  # Stop signal to prevent jitter
+    pwm2.ChangeDutyCycle(0)
+
+def cleanup():
+    """ Cleanup GPIO resources (should be called before exiting). """
     pwm1.stop()
     pwm2.stop()
     GPIO.cleanup()

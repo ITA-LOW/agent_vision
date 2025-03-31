@@ -2,20 +2,21 @@ import cv2
 import time
 from agent import Agent
 from vision import detect_face_position, detect_face_position_yunet
+import motion
 
 def main():
     agent = Agent()
     
     plan_library = [
-        ('adjust_vision', {'context': {'position': 'up_left'}, 'plan': ['look_at_00']}),
-        ('adjust_vision', {'context': {'position': 'up_middle'}, 'plan': ['look_at_01']}),
-        ('adjust_vision', {'context': {'position': 'up_right'}, 'plan': ['look_at_02']}),
+        ('adjust_vision', {'context': {'position': 'top_left'}, 'plan': ['look_at_00']}),
+        ('adjust_vision', {'context': {'position': 'top_center'}, 'plan': ['look_at_01']}),
+        ('adjust_vision', {'context': {'position': 'top_right'}, 'plan': ['look_at_02']}),
         ('adjust_vision', {'context': {'position': 'middle_left'}, 'plan': ['look_at_10']}),
-        ('adjust_vision', {'context': {'position': 'center'}, 'plan': ['look_at_11']}),
+        ('adjust_vision', {'context': {'position': 'middle_center'}, 'plan': ['look_at_11']}),
         ('adjust_vision', {'context': {'position': 'middle_right'}, 'plan': ['look_at_12']}),
-        ('adjust_vision', {'context': {'position': 'down_left'}, 'plan': ['look_at_20']}),
-        ('adjust_vision', {'context': {'position': 'down_middle'}, 'plan': ['look_at_21']}),
-        ('adjust_vision', {'context': {'position': 'down_right'}, 'plan': ['look_at_22']}),
+        ('adjust_vision', {'context': {'position': 'bottom_left'}, 'plan': ['look_at_20']}),
+        ('adjust_vision', {'context': {'position': 'bottom_middle'}, 'plan': ['look_at_21']}),
+        ('adjust_vision', {'context': {'position': 'bottom_right'}, 'plan': ['look_at_22']}),
     ]
     
     agent.set_plan_library(plan_library)
@@ -52,6 +53,8 @@ def main():
     
     cap.release()
     cv2.destroyAllWindows()
+    
+    motion.cleanup()
 
 if __name__ == "__main__":
     main()

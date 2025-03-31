@@ -17,15 +17,12 @@ def detect_face_position(frame):
     row = int((y + h / 2) / (frame_h / 3)) 
 
     mapping = {
-        (0, 0): 'up_left', (0, 1): 'up_middle', (0, 2): 'up_right',
-        (1, 0): 'middle_left', (1, 1): 'center', (1, 2): 'middle_right',
-        (2, 0): 'down_left', (2, 1): 'down_middle', (2, 2): 'down_right'
+        (0, 0): 'top_left', (0, 1): 'top_center', (0, 2): 'top_right',
+        (1, 0): 'middle_left', (1, 1): 'middle_center', (1, 2): 'middle_right',
+        (2, 0): 'bottom_left', (2, 1): 'bottom_center', (2, 2): 'bottom_right'
     }
     position = mapping.get((row, col))
     return position
-
-
-
 
 
 def detect_face_position_yunet(frame):
@@ -74,13 +71,10 @@ def detect_face_position_yunet(frame):
     row = max(0, min(row, 2))
 
     mapping = {
-        (0, 0): 'up_left', (0, 1): 'up_middle', (0, 2): 'up_right',
-        (1, 0): 'middle_left', (1, 1): 'center', (1, 2): 'middle_right',
-        (2, 0): 'down_left', (2, 1): 'down_middle', (2, 2): 'down_right'
+        (0, 0): 'top_left', (0, 1): 'top_center', (0, 2): 'top_right',
+        (1, 0): 'middle_left', (1, 1): 'middle_center', (1, 2): 'middle_right',
+        (2, 0): 'bottom_left', (2, 1): 'bottom_center', (2, 2): 'bottom_right'
     }
 
     position = mapping.get((row, col))
     return position
-
-
-
