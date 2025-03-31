@@ -8,16 +8,18 @@ def main():
     agent = Agent()
     
     plan_library = [
-        ('adjust_vision', {'context': {'position': 'top_left'}, 'plan': ['look_at_00']}),
-        ('adjust_vision', {'context': {'position': 'top_center'}, 'plan': ['look_at_01']}),
-        ('adjust_vision', {'context': {'position': 'top_right'}, 'plan': ['look_at_02']}),
-        ('adjust_vision', {'context': {'position': 'middle_left'}, 'plan': ['look_at_10']}),
-        ('adjust_vision', {'context': {'position': 'middle_center'}, 'plan': ['look_at_11']}),
-        ('adjust_vision', {'context': {'position': 'middle_right'}, 'plan': ['look_at_12']}),
-        ('adjust_vision', {'context': {'position': 'bottom_left'}, 'plan': ['look_at_20']}),
-        ('adjust_vision', {'context': {'position': 'bottom_middle'}, 'plan': ['look_at_21']}),
-        ('adjust_vision', {'context': {'position': 'bottom_right'}, 'plan': ['look_at_22']}),
+        ('adjust_vision', {'context': {'position': 'top_left'}, 'plan': ['look_at_position']}),
+        ('adjust_vision', {'context': {'position': 'top_center'}, 'plan': ['look_at_position']}),
+        ('adjust_vision', {'context': {'position': 'top_right'}, 'plan': ['look_at_position']}),
+        ('adjust_vision', {'context': {'position': 'middle_left'}, 'plan': ['look_at_position']}),
+        ('adjust_vision', {'context': {'position': 'middle_center'}, 'plan': ['look_at_position']}),
+        ('adjust_vision', {'context': {'position': 'middle_right'}, 'plan': ['look_at_position']}),
+        ('adjust_vision', {'context': {'position': 'bottom_left'}, 'plan': ['look_at_position']}),
+        ('adjust_vision', {'context': {'position': 'bottom_middle'}, 'plan': ['look_at_position']}),
+        ('adjust_vision', {'context': {'position': 'bottom_right'}, 'plan': ['look_at_position']}),
     ]
+    
+    motion.reset_pos()
     
     agent.set_plan_library(plan_library)
     agent.add_beliefs({'profile': 'confident'})  # Colocar na biblioteca de planos

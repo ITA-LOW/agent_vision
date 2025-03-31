@@ -3,7 +3,7 @@ import time
 
 # GPIO setup
 SERVO_1 = 17  # First servo on GPIO 17
-SERVO_2 = 18  # Second servo on GPIO 18
+SERVO_2 = 27  # Second servo on GPIO 27
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(SERVO_1, GPIO.OUT)
@@ -17,10 +17,15 @@ pwm1.start(0)
 pwm2.start(0)
 
 position_to_angle = {
-    "top_left": (45, 45), "top_center": (90, 45), "top_right": (135, 45),
-    "middle_left": (45, 90), "middle_center": (90, 90), "middle_right": (135, 90),
-    "bottom_left": (45, 135), "bottom_center": (90, 135), "bottom_right": (135, 135)
+    "top_left": (135, 180), "top_center": (90, 180), "top_right": (45, 180),
+    "middle_left": (135, 160), "middle_center": (90, 160), "middle_right": (45, 160),
+    "bottom_left": (135, 135), "bottom_center": (90, 135), "bottom_right": (45, 135)
 }
+
+def reset_pos():
+    """ Reset servos to the middle position at startup. """
+    print("Resetting servos to middle position...")
+    look_at("middle_center")
 
 def angle_to_duty_cycle(angle):
     """ Convert angle (0-180) to duty cycle for 50Hz PWM (2-12% range). """
