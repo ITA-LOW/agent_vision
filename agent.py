@@ -1,5 +1,6 @@
 import motion
-from agent_core import get_plan_for_goal  # Importa a versão compilada
+from agent_core import context_matches, get_plan_for_goal
+
 
 class PlanLibrary:
     def __init__(self):
@@ -57,6 +58,12 @@ class Agent:
 
     def add_beliefs(self, beliefs):
         self.beliefs.update(beliefs)
+
+    def get_position_belief(self):
+        return self.beliefs.get("position")
+
+    def get_beliefs(self):
+        return self.beliefs
 
     def set_plan_library(self, pl):
         self.plan_library.set_plan_library(pl)

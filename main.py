@@ -4,6 +4,11 @@ from agent import Agent
 from vision import detect_face_position, detect_face_position_yunet
 import motion
 
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+
 def main():
     agent = Agent()
     
@@ -19,7 +24,7 @@ def main():
         ('adjust_vision', {'context': {'position': 'bottom_right'}, 'plan': ['look_at_position']}),
     ]
     
-    motion.reset_pos()
+    motion.reset_pos() # inicia voltando pro centro
     
     agent.set_plan_library(plan_library)
     agent.add_beliefs({'profile': 'confident'})  # Colocar na biblioteca de planos
@@ -40,18 +45,22 @@ def main():
         position = detect_face_position_yunet(frame) # Yunet
         # position = detect_face_position(frame) # Haarcascade
         
-        if position:
+        if position and position != agent.get_position_belief():
             agent.add_beliefs({'position': position})
             agent.add_desires("adjust_vision")
             goal = agent.get_desires()
             agent.update_intention(goal)
             agent.execute_intention()
-        
+            time.sleep(0.25)
+        elif position == None and agent.get_position_belief() != "middle_center":
+            agent.add_beliefs({'position': "middle_center"})
+            agent.add_desires("adjust_vision")
+            goal = agent.get_desires()
+            agent.update_intention(goal)
+            agent.execute_intention()
         #cv2.imshow("Webcam", frame)   #util para humanos, inutil para o robo
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break  # Encerra o loop se 'q' for pressionado
         
-        time.sleep(0.25)  # Delay para processamento
+        #time.sleep(0.25)  # Delay para processamento
     
     cap.release()
     cv2.destroyAllWindows()
