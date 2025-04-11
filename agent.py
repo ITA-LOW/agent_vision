@@ -1,4 +1,5 @@
 import motion
+from agent_core import get_plan_for_goal  # Importa a versão compilada
 
 class PlanLibrary:
     def __init__(self):
@@ -23,19 +24,18 @@ class PlanLibrary:
         """Retorna o primeiro plano adequado para o objetivo com base nos beliefs."""
         print("DEBUG - Beliefs atuais:", bb)
         print("DEBUG - Buscando plano para:", goal)
-        
+
         if goal not in self.plans:
             print("DEBUG - Nenhum plano encontrado para esse objetivo.")
             return None
 
-        for plan_entry in self.plans[goal]:
-            if set(plan_entry['context'].items()).issubset(bb.items()):
-                print("DEBUG - Plano encontrado:", plan_entry['plan'])
-                return plan_entry['plan']
+        plan = get_plan_for_goal(self.plans[goal], bb)
+        if plan:
+            print("DEBUG - Plano encontrado:", plan)
+            return plan
 
         print("DEBUG - Nenhum plano compatível encontrado.")
         return None
-
 
 class Action:
     def look_at_position(self, position):

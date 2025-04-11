@@ -27,7 +27,7 @@ def detect_face_position(frame):
 
 def detect_face_position_yunet(frame):
     
-    model = 'face_detection_yunet_2023mar.onnx'
+    model = 'models/face_detection_yunet_2023mar.onnx' ## organizei numa pasta com os modelos de visão
     input_size = (640, 640)
 
     face_detector_yunet = cv2.FaceDetectorYN.create(
