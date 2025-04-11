@@ -15,7 +15,7 @@ def main():
         ('adjust_vision', {'context': {'position': 'middle_center'}, 'plan': ['look_at_position']}),
         ('adjust_vision', {'context': {'position': 'middle_right'}, 'plan': ['look_at_position']}),
         ('adjust_vision', {'context': {'position': 'bottom_left'}, 'plan': ['look_at_position']}),
-        ('adjust_vision', {'context': {'position': 'bottom_middle'}, 'plan': ['look_at_position']}),
+        ('adjust_vision', {'context': {'position': 'bottom_center'}, 'plan': ['look_at_position']}),
         ('adjust_vision', {'context': {'position': 'bottom_right'}, 'plan': ['look_at_position']}),
     ]
     
