@@ -45,7 +45,7 @@ def look_at(position):
     pwm1.ChangeDutyCycle(duty1)
     pwm2.ChangeDutyCycle(duty2)
 
-    time.sleep(0.5)  # Allow servos to move
+    time.sleep(0.1)  # Allow servos to move
 
     pwm1.ChangeDutyCycle(0)  # Stop signal to prevent jitter
     pwm2.ChangeDutyCycle(0)

@@ -44,7 +44,7 @@ def main():
         # Detecta a posição do rosto
         position = detect_face_position_yunet(frame) # Yunet
         # position = detect_face_position(frame) # Haarcascade
-        
+        # TODO deletar as outras beliefs antes de adicionar nova (position talvez intention tb)
         if position and position != agent.get_position_belief():
             agent.add_beliefs({'position': position})
             agent.add_desires("adjust_vision")
@@ -58,7 +58,7 @@ def main():
             goal = agent.get_desires()
             agent.update_intention(goal)
             agent.execute_intention()
-        #cv2.imshow("Webcam", frame)   #util para humanos, inutil para o robo
+        # cv2.imshow("Webcam", frame)   #util para humanos, inutil para o robo
         
         #time.sleep(0.25)  # Delay para processamento
     
